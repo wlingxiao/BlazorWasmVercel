@@ -1,0 +1,33 @@
+﻿@page "/data-binding"
+@using System.Globalization
+
+@*https://stackoverflow.com/questions/58221915/difference-between-bind-and-bind-value*@
+<PageTitle>Data Binding</PageTitle>
+
+<label>bind-Value</label><input @bind-Value="_bindValueInput"
+                                @bind-Value:event="oninput"
+                                @bind-Value:after="AfterBindValue" />
+<span>@_bindValueOutput</span>
+<br />
+<label>bind</label><input @bind="_bindInput"
+                          @bind:after="AfterBind" />
+<span>@_bindOutput</span>
+
+@code {
+    private string _bindValueInput = "";
+    private string _bindValueOutput = "";
+
+    private string _bindInput = "";
+    private string _bindOutput = "";
+
+    private void AfterBindValue()
+    {
+        _bindValueOutput = _bindValueInput.ToUpper(CultureInfo.CurrentCulture);
+    }
+
+    private void AfterBind()
+    {
+        _bindOutput = _bindInput.ToUpper(CultureInfo.CurrentCulture);
+    }
+
+}
